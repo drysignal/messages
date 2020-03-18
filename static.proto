@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+import "types.proto";
+
+service SAST {
+    rpc Analyze(Manifest) returns (stream Signal);
+    rpc Cancel(Cancellation) returns (Empty);
+    rpc Updates(Empty) returns (stream Status);
+}

@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+// Empty placeholder type
+message Empty {}
+
+// Manifest is the primary request object
+message Manifest {
+    string request_id           = 1;
+    string resource_url         = 2;
+    repeated string languages   = 3;
+}
+
+// Signal is the primary response object
+message Signal {
+    string request_id  = 1;
+    string title = 2;
+    string message = 3;
+    int64 datetime = 4;
+    int32 cwe = 5;
+    string commit = 6;
+    string file_path = 7;
+    int32 start_line = 8;
+    int32 end_line = 9;
+    int32 column_start = 10;
+    int32 column_end = 11;
+}
+
+// Cancellation is a request to cancel a scan
+message Cancellation {
+    string request_id  = 1;
+}
+
+enum StatusType {
+    QUEUED      = 0;
+    RUNNING     = 1;
+    CANCELLED   = 2;
+    COMPLETE    = 3;
+    ERROR       = 4;
+}
+
+// Status is the primary status response type.
+message Status {
+    string request_id   = 1;
+    uint32 percentage   = 2;
+    StatusType status   = 3;
+    string message      = 4;
+}
